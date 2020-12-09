@@ -91,7 +91,6 @@ Makefile
 tox.ini
 entrypoint.sh
 .pytest_cache
-docker-compose.yml
 /.idea
 postgres-data
 .flaskenv

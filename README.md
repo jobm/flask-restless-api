@@ -65,7 +65,7 @@ http GET https://lori-bookstore.herokuapp.com/api/v1/all-books
 
 ### Add Books To Cart
 Once you see books you may want to calculate the cost you add to cart first, make a `POST` `request` to 
-`{BASE_URL}/api/v1/cart-items`: USE the ACCESS_TOKEN in headers to make the request
+`{BASE_URL}/api/v1/cart-items`: USE the ACCESS_TOKEN you got after sign-up in headers to make the request
 
 ```
 SAMPLE BODY
