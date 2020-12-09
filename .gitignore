@@ -95,3 +95,4 @@ docker-compose.yml
 /.idea
 postgres-data
 .flaskenv
+migrations

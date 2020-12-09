@@ -11,28 +11,32 @@ from ...utils.model_utils import save_to_db
 
 class BookResource(Resource):
 
-    def get(self, book_id):
+    @staticmethod
+    def get(book_id):
         book_schema = BookSchema()
         book = Book.query.get_or_404(book_id)
         return {"book": book_schema.dump(book)}, 200
 
+    @staticmethod
     @admin_required
-    def put(self, book_id):
+    def put(book_id):
         book_schema = BookSchema(partial=True)
         book = Book.query.get_or_404(book_id)
         book = book_schema.load(request.json, instance=book)
         db.session.commit()
         return {"msg": "book updated", "book": book_schema.dump(book)}, 201
 
+    @staticmethod
     @admin_required
-    def post(self):
+    def post():
         book_schema = BookSchema()
         book = book_schema.load(request.json)
         save_to_db(db, book)
         return {"msg": "book created", "book": book_schema.dump(book)}, 201
 
+    @staticmethod
     @admin_required
-    def delete(self, book_id):
+    def delete(book_id):
         book = Book.query.get_or_404(book_id)
         db.session.delete(book)
         db.session.commit()
@@ -40,8 +44,9 @@ class BookResource(Resource):
 
 
 class BooksResource(Resource):
-    
-    def get(self):
+
+    @staticmethod
+    def get():
         schema = BookSchema(many=True)
         query = Book.query
         return paginate(query, schema)

@@ -4,6 +4,7 @@ from flask import url_for
 from datetime import datetime, timedelta
 from scalpl import Cut
 
+from api.api.resources import CartOrderPrice
 from api.utils.model_utils import (
     save_to_db,
     save_all_to_db
@@ -18,6 +19,9 @@ FIVE_DAYS = 5
 @pytest.fixture
 def _items_data(db, book_factory):
     books = book_factory.create_batch(NUM_BOOKS)
+    books[0].genre = "Fiction"
+    books[1].genre = "Regular"
+    books[2].genre = "Novel"
     save_all_to_db(db, books)
     items = [
         {"book_id": books[0].id,
@@ -40,14 +44,14 @@ class TestCartItemsResource:
         cart_items_url = url_for("api.cart_items")
         resp = client.post(
             cart_items_url,
-            json={'items': 'bar'},
-            headers=all_headers['no_auth_headers'])
+            json={"items": "bar"},
+            headers=all_headers["no_auth_headers"])
         assert resp.status_code == 401
 
         resp = client.post(
             cart_items_url,
             json={"items": None},
-            headers=all_headers['customer_headers'])
+            headers=all_headers["customer_headers"])
         assert resp.status_code == 400
 
         save_to_db(db, customer)
@@ -55,7 +59,7 @@ class TestCartItemsResource:
         resp = client.post(
             cart_items_url,
             json={"items": _items_data},
-            headers=all_headers['customer_headers'])
+            headers=all_headers["customer_headers"])
 
         assert resp.status_code == 201
 
@@ -63,12 +67,29 @@ class TestCartItemsResource:
 class TestCartOrderPrice:
 
     @staticmethod
+    def test_get_book_cost(db, book):
+        fiction_book_price = 3
+        book.genre = "Fiction"
+        save_to_db(db, book)
+
+        today = datetime.now(pytz.utc)
+        due_at = datetime.now(pytz.utc) + timedelta(days=3)
+        cost = CartOrderPrice.get_book_cost(book.id, due_at)
+        assert cost == (due_at - today).days or 1 * \
+               fiction_book_price
+
+        due_at = datetime.now(pytz.utc) + timedelta(days=1)
+        cost = CartOrderPrice.get_book_cost(book.id, due_at)
+        assert cost == (due_at - today).days or 1 * \
+               fiction_book_price
+
+    @staticmethod
     def test_get_order_price(client, _items_data, all_headers):
         cart_items_url = url_for("api.cart_items")
         resp = client.post(
             cart_items_url,
             json={"items": _items_data},
-            headers=all_headers['customer_headers'])
+            headers=all_headers["customer_headers"])
 
         resp_data = Cut(resp.json)
         cart_id = resp_data["data.cart.id"]
@@ -76,13 +97,13 @@ class TestCartOrderPrice:
         order_price_url = url_for("api.order_price", cart_id=-10)
         resp = client.get(
             order_price_url,
-            headers=all_headers['customer_headers'])
+            headers=all_headers["customer_headers"])
         assert resp.status_code == 404
 
         order_price_url = url_for("api.order_price", cart_id=cart_id)
         resp = client.get(
             order_price_url,
-            headers=all_headers['no_auth_headers'])
+            headers=all_headers["no_auth_headers"])
         assert resp.status_code == 401
 
         resp = client.get(
@@ -90,6 +111,8 @@ class TestCartOrderPrice:
             headers=all_headers["customer_headers"])
         assert resp.status_code == 200
 
-        days = [TWO_DAYS, FOUR_DAYS, FIVE_DAYS]
-        total_days = sum(days) - len(days)
-        assert resp.json["cost_usd"] == total_days * NUM_BOOKS
+        fiction_cost = (TWO_DAYS - 1) * 3
+        regular_cost = (FOUR_DAYS - 1) * 1.5
+        novel_cost = (FIVE_DAYS - 1) * 1.5
+        sum_book_cost = sum([fiction_cost, regular_cost, novel_cost])
+        assert resp.json["cost_usd"] == sum_book_cost

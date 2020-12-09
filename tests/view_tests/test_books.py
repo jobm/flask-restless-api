@@ -2,6 +2,7 @@ import pytest
 from flask import url_for
 
 from api.models import Book
+from api.utils.model_utils import save_all_to_db
 
 
 @pytest.fixture
@@ -9,7 +10,8 @@ def _book():
     return {
         "author": "Volkov Wolfgang",
         "description": "what a lovely piece of work",
-        "title": "Ex Machina"}
+        "title": "Ex Machina",
+        "genre": "Fiction"}
 
 
 def test_create_book(client, all_headers, _book):
@@ -26,6 +28,7 @@ def test_create_book(client, all_headers, _book):
         json=_book,
         headers=all_headers["admin_headers"])
     assert resp.status_code == 201
+
     saved_book_id = resp.json["book"]["id"]
     assert Book.query.get(saved_book_id)
 
@@ -38,7 +41,9 @@ def test_update_book(client, all_headers, _book):
         headers=all_headers["admin_headers"])
     created_book_id = resp.json["book"]["id"]
 
-    update_book_url = url_for("api.book_by_id", book_id=created_book_id)
+    update_book_url = url_for(
+        "api.book_by_id",
+        book_id=created_book_id)
 
     book_data = dict(_book)
     new_author = "jon snow"
@@ -79,9 +84,7 @@ def test_get_all_books(client, db, all_headers, book_factory):
 
     default_num_books = 10
     books = book_factory.create_batch(default_num_books)
-
-    db.session.add_all(books)
-    db.session.commit()
+    save_all_to_db(db, books)
 
     resp = client.get(
         books_url,

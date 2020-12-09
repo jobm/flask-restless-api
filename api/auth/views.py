@@ -10,17 +10,20 @@ from flask_jwt_extended import (
     jwt_required,
     jwt_refresh_token_required,
     get_jwt_identity,
-    get_raw_jwt,
-)
+    get_raw_jwt)
 from marshmallow import ValidationError
 
 from api.api.schemas import UserSchema
-from api.models import User
-from api.extensions import pwd_context, jwt, apispec, db
+from api.models import Customer, User
+from api.extensions import (
+    db,
+    apispec,
+    jwt,
+    pwd_context)
 from api.auth.helpers import (
     add_token_to_database,
     revoke_token,
-    is_token_revoked,)
+    is_token_revoked)
 from api.utils.model_utils import save_to_db
 
 
@@ -31,23 +34,36 @@ blueprint = Blueprint("auth", __name__, url_prefix="/auth")
 def register_user():
     if not request.is_json:
         return jsonify({"msg": "Missing JSON in request"}), 400
+
+    if not request.json.get("username"):
+        return jsonify({"msg": "JSON missing username"}), 400
+
     username = request.json.get("username")
     user = User.query.filter_by(username=username).first()
+
     if user:
         return jsonify({"msg": "Username already taken"}), 400
-    request.json['active'] = True
+
+    request.json["active"] = True
     user_schema = UserSchema()
     user = user_schema.load(request.json)
     save_to_db(db, user)
-    user_claims_ = {"id": user.id, "role": user.role}
+    user_claims_ = {"id": user.id, "role": "customer"}
     access_token = create_access_token(
         identity=user.id,
         user_claims=user_claims_)
     refresh_token = create_refresh_token(
         identity=user.id,
         user_claims=user_claims_)
+    # create a customer, only for simple auth purposes
+    customer = Customer(
+        name=username,
+        email=user.email,
+        user_id=user.id)
+    save_to_db(db, customer)
     resp = {
         "user": user_schema.dump(user),
+        "customer_id": customer.id,
         "access_token": access_token,
         "refresh_token": refresh_token}
     return jsonify(resp), 201

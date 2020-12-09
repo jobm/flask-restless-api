@@ -46,3 +46,4 @@ class UsersResource(Resource):
         schema = UserSchema(many=True)
         query = User.query
         return paginate(query, schema)
+

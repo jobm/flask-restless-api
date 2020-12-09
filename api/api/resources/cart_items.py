@@ -6,8 +6,18 @@ from flask_jwt_extended import current_user, jwt_required
 from flask_restful import Resource, inputs
 
 from ...extensions import db
-from ...api.schemas import CartSchema, CartItemSchema, RentalSchema
-from ...models import Cart, Customer, CartItem, Rental
+from ...api.schemas import (
+    CartSchema,
+    CartItemSchema,
+    RentalSchema
+)
+from ...models import (
+    Book,
+    Cart,
+    CartItem,
+    Customer,
+    Rental
+)
 from ...utils.model_utils import save_to_db, save_all_to_db
 
 
@@ -54,8 +64,8 @@ class CartItemsResource(Resource):
         except (KeyError, IndexError):
             return {"message": "Invalid json"}, 400
 
-        _cart_items = []
         rentals = []
+        _cart_items = []
         for it in items:
             cart_item = self.create_cart_item(
                 it['book_id'],
@@ -86,19 +96,31 @@ class CartOrderPrice(Resource):
     method_decorators = [jwt_required]
 
     @staticmethod
-    def num_of_days(due_at):
+    def get_book_cost(book_id, due_at):
         today = datetime.now(pytz.utc)
         due_at = due_at.astimezone(pytz.utc)
-        return (due_at - today).days or 1
+        num_days = (due_at - today).days or 1
+        book = Book.query.get(book_id)
+        book_genre = book.genre.lower()
+        costs_dict = {
+            "fiction": 3,
+            "novel": 1.5,
+            "regular": 1.5}
+        total_cost = costs_dict.get(
+            book_genre,
+            "regular") * num_days
+        return total_cost
 
     def get(self, cart_id):
         cart = Cart.query.get_or_404(cart_id)
+        if not cart.cart_items:
+            return {"message": "Cart is empty"}, 404
+
         rentals = Rental.query.join(
             CartItem,
             CartItem.book_id == Rental.book_id
         ).filter_by(cart_id=cart.id).all()
-        num_books = len(rentals)
-        total_days = sum([
-            self.num_of_days(rental.due_at)
+        total_cost = sum([
+            self.get_book_cost(rental.book_id, rental.due_at)
             for rental in rentals])
-        return {"cost_usd": total_days * num_books}, 200
+        return {"cost_usd": total_cost}, 200
