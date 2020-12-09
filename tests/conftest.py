@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from api.models import User
 from api.app import create_app
 from api.extensions import db as _db
-from api.utils.model_utils import (
+from api.utils.models import (
     ROLE_ADMIN,
     ROLE_CUSTOMER,
     save_to_db)

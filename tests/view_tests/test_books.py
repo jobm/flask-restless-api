@@ -2,7 +2,7 @@ import pytest
 from flask import url_for
 
 from api.models import Book
-from api.utils.model_utils import save_all_to_db
+from api.utils.models import save_all_to_db
 
 
 @pytest.fixture

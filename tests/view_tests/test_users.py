@@ -1,7 +1,7 @@
 from flask import url_for
 from scalpl import Cut
 
-from api.utils.model_utils import save_to_db
+from api.utils.models import save_to_db
 from api.extensions import pwd_context
 from api.models import User
 

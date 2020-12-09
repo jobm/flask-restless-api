@@ -12,7 +12,7 @@ from flask_jwt_extended.exceptions import (
 from sqlalchemy.orm.exc import NoResultFound
 
 from api.models import TokenBlacklist, User
-from api.utils.model_utils import ROLE_ADMIN
+from api.utils.models import ROLE_ADMIN
 from ..extensions import db, jwt
 
 

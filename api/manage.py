@@ -1,6 +1,6 @@
 import click
 from flask.cli import FlaskGroup
-from api.utils.model_utils import ROLE_ADMIN
+from api.utils.models import ROLE_ADMIN
 
 from api.app import create_app
 
@@ -19,7 +19,7 @@ def init():
     """Create a new admin user"""
     from api.extensions import db
     from api.models import User
-    from api.utils.model_utils import save_to_db
+    from api.utils.models import save_to_db
 
     click.echo("create user")
     admin_user = User(

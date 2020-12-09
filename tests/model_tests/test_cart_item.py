@@ -1,7 +1,7 @@
 import pytest
 
 from api.models import CartItem
-from api.utils.model_utils import save_to_db
+from api.utils.models import save_to_db
 from ..model_factories.cart_item_factory import CartItemFactory
 
 

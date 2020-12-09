@@ -6,7 +6,7 @@ from ...extensions import db
 from ...commons.pagination import paginate
 from ...models.book import Book
 from ..schemas.book import BookSchema
-from ...utils.model_utils import save_to_db
+from ...utils.models import save_to_db
 
 
 class BookResource(Resource):

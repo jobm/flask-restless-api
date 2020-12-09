@@ -1,5 +1,4 @@
 import pytz
-from datetime import datetime
 
 from flask import request
 from flask_jwt_extended import current_user, jwt_required
@@ -9,16 +8,18 @@ from ...extensions import db
 from ...api.schemas import (
     CartSchema,
     CartItemSchema,
-    RentalSchema
-)
+    RentalSchema)
 from ...models import (
     Book,
     Cart,
     CartItem,
     Customer,
-    Rental
-)
-from ...utils.model_utils import save_to_db, save_all_to_db
+    Rental)
+from ...utils.cart_items import (
+    fiction_book_costs,
+    novel_book_costs,
+    regular_book_costs)
+from ...utils.models import save_to_db, save_all_to_db
 
 
 class CartItemsResource(Resource):
@@ -96,19 +97,21 @@ class CartOrderPrice(Resource):
     method_decorators = [jwt_required]
 
     @staticmethod
-    def get_book_cost(book_id, due_at):
-        today = datetime.now(pytz.utc)
-        due_at = due_at.astimezone(pytz.utc)
-        num_days = (due_at - today).days or 1
+    def get_book_cost(book_id, rent_from, due_at):
+        due_at = due_at.replace(tzinfo=pytz.utc)
+        rent_from = rent_from.replace(tzinfo=pytz.utc)
+
+        num_days = (due_at.date() - rent_from.date()
+                    ).days or 1
         book = Book.query.get(book_id)
         book_genre = book.genre.lower()
+
         costs_dict = {
-            "fiction": 3,
-            "novel": 1.5,
-            "regular": 1.5}
+            "fiction": fiction_book_costs,
+            "novel": novel_book_costs,
+            "regular": regular_book_costs}
         total_cost = costs_dict.get(
-            book_genre,
-            "regular") * num_days
+            book_genre, "regular")(num_days)
         return total_cost
 
     def get(self, cart_id):
@@ -121,6 +124,9 @@ class CartOrderPrice(Resource):
             CartItem.book_id == Rental.book_id
         ).filter_by(cart_id=cart.id).all()
         total_cost = sum([
-            self.get_book_cost(rental.book_id, rental.due_at)
+            self.get_book_cost(
+                rental.book_id,
+                rental.created_at,
+                rental.due_at)
             for rental in rentals])
         return {"cost_usd": total_cost}, 200

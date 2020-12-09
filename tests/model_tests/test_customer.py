@@ -1,7 +1,7 @@
 import pytest
 
 from api.models import Customer
-from api.utils.model_utils import save_to_db
+from api.utils.models import save_to_db
 from ..model_factories.customer_factory import CustomerFactory
 from ..model_factories.user_factory import UserFactory
 

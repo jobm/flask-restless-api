@@ -1,7 +1,7 @@
 import pytest
 from datetime import datetime
 
-from api.utils.model_utils import save_to_db
+from api.utils.models import save_to_db
 
 INVOICE_DUE_AT = datetime.utcnow()
 INVOICE_AMOUNT = 10

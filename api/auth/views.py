@@ -24,7 +24,7 @@ from api.auth.helpers import (
     add_token_to_database,
     revoke_token,
     is_token_revoked)
-from api.utils.model_utils import save_to_db
+from api.utils.models import save_to_db
 
 
 blueprint = Blueprint("auth", __name__, url_prefix="/auth")
