@@ -59,17 +59,17 @@ def test_delete_user(client, db, user, admin_headers):
     assert db.session.query(User).filter_by(id=user.id).first() is None
 
 
-def test_create_user(client, db, admin_headers):
+def test_create_user(client, db):
     # test bad data
     register_user_url = url_for('auth.register_user')
     data = {"username": "created"}
-    rep = client.post(register_user_url, json=data, headers=admin_headers)
+    rep = client.post(register_user_url, json=data)
     assert rep.status_code == 400
 
     data["password"] = "admin"
     data["email"] = "create@mail.com"
 
-    resp = client.post(register_user_url, json=data, headers=admin_headers)
+    resp = client.post(register_user_url, json=data)
     assert resp.status_code == 201
 
     data = Cut(resp.get_json())

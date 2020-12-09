@@ -82,7 +82,6 @@ class TestCartItemsResource:
             cart_items_url,
             json={"items": _items_data},
             headers=all_headers["customer_headers"])
-
         assert resp.status_code == 201
 
 

@@ -114,6 +114,7 @@ class CartOrderPrice(Resource):
             book_genre, "regular")(num_days)
         return total_cost
 
+    @jwt_required
     def get(self, cart_id):
         cart = Cart.query.get_or_404(cart_id)
         if not cart.cart_items:

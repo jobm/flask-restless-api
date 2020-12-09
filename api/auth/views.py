@@ -24,8 +24,7 @@ from api.auth.helpers import (
     add_token_to_database,
     revoke_token,
     is_token_revoked)
-from api.utils.models import save_to_db
-
+from api.utils.models import save_to_db, ROLE_CUSTOMER
 
 blueprint = Blueprint("auth", __name__, url_prefix="/auth")
 
@@ -47,8 +46,9 @@ def register_user():
     request.json["active"] = True
     user_schema = UserSchema()
     user = user_schema.load(request.json)
+    user.role = ROLE_CUSTOMER
     save_to_db(db, user)
-    user_claims_ = {"id": user.id, "role": "customer"}
+    user_claims_ = {"id": user.id, "role": ROLE_CUSTOMER}
     access_token = create_access_token(
         identity=user.id,
         user_claims=user_claims_)
