@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Coverage report</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.ba-throttle-debounce.min.js"></script>
+    <script type="text/javascript" src="jquery.tablesorter.min.js"></script>
+    <script type="text/javascript" src="jquery.hotkeys.js"></script>
+    <script type="text/javascript" src="coverage_html.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(coverage.index_ready);
+    </script>
+</head>
+<body class="indexfile">
+<div id="header">
+    <div class="content">
+        <h1>Coverage report:
+            <span class="pc_cov">94%</span>
+        </h1>
+        <img id="keyboard_icon" src="keybd_closed.png" alt="Show keyboard shortcuts" />
+        <form id="filter_container">
+            <input id="filter" type="text" value="" placeholder="filter..." />
+        </form>
+    </div>
+</div>
+<div class="help_panel">
+    <img id="panel_icon" src="keybd_open.png" alt="Hide keyboard shortcuts" />
+    <p class="legend">Hot-keys on this page</p>
+    <div>
+    <p class="keyhelp">
+        <span class="key">n</span>
+        <span class="key">s</span>
+        <span class="key">m</span>
+        <span class="key">x</span>
+        <span class="key">c</span> &nbsp; change column sorting
+    </p>
+    </div>
+</div>
+<div id="index">
+    <table class="index">
+        <thead>
+            <tr class="tablehead" title="Click to sort">
+                <th class="name left headerSortDown shortkey_n">Module</th>
+                <th class="shortkey_s">statements</th>
+                <th class="shortkey_m">missing</th>
+                <th class="shortkey_x">excluded</th>
+                <th class="right shortkey_c">coverage</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr class="total">
+                <td class="name left">Total</td>
+                <td>1028</td>
+                <td>63</td>
+                <td>0</td>
+                <td class="right" data-ratio="965 1028">94%</td>
+            </tr>
+        </tfoot>
+        <tbody>
+            <tr class="file">
+                <td class="name left"><a href="api___init___py.html">api/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="api_api___init___py.html">api/api/__init__.py</a></td>
+                <td>2</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="2 2">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="api_api_resources___init___py.html">api/api/resources/__init__.py</a></td>
+                <td>4</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="4 4">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="api_api_resources_books_py.html">api/api/resources/books.py</a></td>
+                <td>37</td>
+                <td>3</td>
+                <td>0</td>
+                <td class="right" data-ratio="34 37">92%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="api_api_resources_cart_items_py.html">api/api/resources/cart_items.py</a></td>
+                <td>67</td>
+                <td>1</td>
+                <td>0</td>
+                <td class="right" data-ratio="66 67">99%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="api_api_resources_users_py.html">api/api/resources/users.py</a></td>
+                <td>31</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="31 31">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="api_api_schemas___init___py.html">api/api/schemas/__init__.py</a></td>
+                <td>8</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="8 8">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="api_api_schemas_blacklist_py.html">api/api/schemas/blacklist.py</a></td>
+                <td>8</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="8 8">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="api_api_schemas_book_py.html">api/api/schemas/book.py</a></td>
+                <td>8</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="8 8">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="api_api_schemas_cart_py.html">api/api/schemas/cart.py</a></td>
+                <td>8</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="8 8">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="api_api_schemas_cart_item_py.html">api/api/schemas/cart_item.py</a></td>
+                <td>8</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="8 8">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="api_api_schemas_customer_py.html">api/api/schemas/customer.py</a></td>
+                <td>8</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="8 8">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="api_api_schemas_rental_py.html">api/api/schemas/rental.py</a></td>
+                <td>8</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="8 8">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="api_api_schemas_user_py.html">api/api/schemas/user.py</a></td>
+                <td>10</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="10 10">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="api_api_views_py.html">api/api/views.py</a></td>
+                <td>29</td>
+                <td>1</td>
+                <td>0</td>
+                <td class="right" data-ratio="28 29">97%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="api_app_py.html">api/app.py</a></td>
+                <td>24</td>
+                <td>1</td>
+                <td>0</td>
+                <td class="right" data-ratio="23 24">96%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="api_auth___init___py.html">api/auth/__init__.py</a></td>
+                <td>2</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="2 2">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="api_auth_helpers_py.html">api/auth/helpers.py</a></td>
+                <td>45</td>
+                <td>5</td>
+                <td>0</td>
+                <td class="right" data-ratio="40 45">89%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="api_auth_views_py.html">api/auth/views.py</a></td>
+                <td>77</td>
+                <td>11</td>
+                <td>0</td>
+                <td class="right" data-ratio="66 77">86%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="api_commons___init___py.html">api/commons/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="api_commons_apispec_py.html">api/commons/apispec.py</a></td>
+                <td>40</td>
+                <td>4</td>
+                <td>0</td>
+                <td class="right" data-ratio="36 40">90%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="api_commons_pagination_py.html">api/commons/pagination.py</a></td>
+                <td>10</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="10 10">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="api_config_py.html">api/config.py</a></td>
+                <td>8</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="8 8">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="api_extensions_py.html">api/extensions.py</a></td>
+                <td>12</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="12 12">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="api_manage_py.html">api/manage.py</a></td>
+                <td>17</td>
+                <td>17</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 17">0%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="api_models___init___py.html">api/models/__init__.py</a></td>
+                <td>8</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="8 8">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="api_models_blacklist_py.html">api/models/blacklist.py</a></td>
+                <td>11</td>
+                <td>1</td>
+                <td>0</td>
+                <td class="right" data-ratio="10 11">91%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="api_models_book_py.html">api/models/book.py</a></td>
+                <td>12</td>
+                <td>1</td>
+                <td>0</td>
+                <td class="right" data-ratio="11 12">92%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="api_models_cart_py.html">api/models/cart.py</a></td>
+                <td>11</td>
+                <td>1</td>
+                <td>0</td>
+                <td class="right" data-ratio="10 11">91%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="api_models_cart_item_py.html">api/models/cart_item.py</a></td>
+                <td>12</td>
+                <td>1</td>
+                <td>0</td>
+                <td class="right" data-ratio="11 12">92%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="api_models_customer_py.html">api/models/customer.py</a></td>
+                <td>12</td>
+                <td>1</td>
+                <td>0</td>
+                <td class="right" data-ratio="11 12">92%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="api_models_rental_py.html">api/models/rental.py</a></td>
+                <td>16</td>
+                <td>1</td>
+                <td>0</td>
+                <td class="right" data-ratio="15 16">94%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="api_models_user_py.html">api/models/user.py</a></td>
+                <td>16</td>
+                <td>1</td>
+                <td>0</td>
+                <td class="right" data-ratio="15 16">94%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="api_utils___init___py.html">api/utils/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="api_utils_cart_items_py.html">api/utils/cart_items.py</a></td>
+                <td>15</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="15 15">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="api_utils_models_py.html">api/utils/models.py</a></td>
+                <td>20</td>
+                <td>8</td>
+                <td>0</td>
+                <td class="right" data-ratio="12 20">60%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="api_wsgi_py.html">api/wsgi.py</a></td>
+                <td>2</td>
+                <td>2</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 2">0%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="setup_py.html">setup.py</a></td>
+                <td>3</td>
+                <td>3</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 3">0%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="tests___init___py.html">tests/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="tests_conftest_py.html">tests/conftest.py</a></td>
+                <td>60</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="60 60">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="tests_model_factories___init___py.html">tests/model_factories/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="tests_model_factories_book_factory_py.html">tests/model_factories/book_factory.py</a></td>
+                <td>17</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="17 17">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="tests_model_factories_cart_factory_py.html">tests/model_factories/cart_factory.py</a></td>
+                <td>5</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="5 5">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="tests_model_factories_cart_item_factory_py.html">tests/model_factories/cart_item_factory.py</a></td>
+                <td>5</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="5 5">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="tests_model_factories_customer_factory_py.html">tests/model_factories/customer_factory.py</a></td>
+                <td>9</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="9 9">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="tests_model_factories_rental_factory_py.html">tests/model_factories/rental_factory.py</a></td>
+                <td>8</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="8 8">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="tests_model_factories_user_factory_py.html">tests/model_factories/user_factory.py</a></td>
+                <td>11</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="11 11">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="tests_model_tests___init___py.html">tests/model_tests/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="tests_model_tests_test_book_py.html">tests/model_tests/test_book.py</a></td>
+                <td>15</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="15 15">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="tests_model_tests_test_cart_py.html">tests/model_tests/test_cart.py</a></td>
+                <td>17</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="17 17">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="tests_model_tests_test_cart_item_py.html">tests/model_tests/test_cart_item.py</a></td>
+                <td>21</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="21 21">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="tests_model_tests_test_customer_py.html">tests/model_tests/test_customer.py</a></td>
+                <td>18</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="18 18">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="tests_model_tests_test_rental_py.html">tests/model_tests/test_rental.py</a></td>
+                <td>20</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="20 20">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="tests_model_tests_test_user_py.html">tests/model_tests/test_user.py</a></td>
+                <td>15</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="15 15">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="tests_view_tests___init___py.html">tests/view_tests/__init__.py</a></td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 0">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="tests_view_tests_test_auth_py.html">tests/view_tests/test_auth.py</a></td>
+                <td>10</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="10 10">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="tests_view_tests_test_books_py.html">tests/view_tests/test_books.py</a></td>
+                <td>45</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="45 45">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="tests_view_tests_test_cart_items_py.html">tests/view_tests/test_cart_items.py</a></td>
+                <td>78</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="78 78">100%</td>
+            </tr>
+            <tr class="file">
+                <td class="name left"><a href="tests_view_tests_test_users_py.html">tests/view_tests/test_users.py</a></td>
+                <td>65</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="65 65">100%</td>
+            </tr>
+        </tbody>
+    </table>
+    <p id="no_rows">
+        No items found using the specified filter.
+    </p>
+</div>
+<div id="footer">
+    <div class="content">
+        <p>
+            <a class="nav" href="https://coverage.readthedocs.io">coverage.py v5.3</a>,
+            created at 2020-12-09 21:39 +0300
+        </p>
+    </div>
+</div>
+</body>
+</html>
