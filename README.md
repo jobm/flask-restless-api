@@ -9,7 +9,7 @@ This section will demonstrate making api calls using `httpie`, you may need to i
 
 ### Basic Auth
 
-This api uses OAuth2.0 Client Credentials flow for basic authentication.
+This api uses OAuth2.0 Password grant flow for basic authentication.
 
 #### Register User
 

@@ -2,15 +2,14 @@ version: '3.6'
 
 services:
   web:
-    build: .
-    command: gunicorn -b 0.0.0.0:5000 api.wsgi:app
     env_file:
       - ./.flaskenv
+    build: .
+    command: gunicorn -b 0.0.0.0:5000 api.wsgi:app
     depends_on:
       - db
     environment:
       STAGE: deveopment
-      DATABASE_URL: ${DATABASE_URL}
     networks:
       - default
     ports:
@@ -21,15 +20,13 @@ services:
     restart: always
 
   db:
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
+    env_file:
+      - ./.psqlenv
     image: postgres:latest
     networks:
       - default
     ports:
-      - 5405:5432
+      - 5432:5432
     restart: always
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
