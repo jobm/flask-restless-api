@@ -37,7 +37,7 @@ You may need the access token on some endpoints.
 To login a user make a `POST` `request` to `{BASE_URL}/auth/login`:
 
 ```
-http POST https://lori-bookstore.herokuapp.com/auth/login username=flake8 password=lorem
+http POST https://bookstore.herokuapp.com/auth/login username=flake8 password=lorem
 
 {
     "access_token": ACCESS_TOKEN,
