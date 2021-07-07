@@ -1,7 +1,7 @@
 # Simple Book Store
 
 This is a simple book renting cost api. It calculates the amount you owe for books rented based on number of days.
-BASE_URL = `https://lori-bookstore.herokuapp.com`
+BASE_URL = `https://bookstore.herokuapp.com`
 
 ## Using the API
 
