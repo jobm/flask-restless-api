@@ -19,7 +19,7 @@ from api.extensions import (
     db,
     apispec,
     jwt,
-    pwd_context)
+    pwd_context, openid_connect)
 from api.auth.helpers import (
     add_token_to_database,
     revoke_token,
@@ -76,19 +76,25 @@ def login():
 
     username = request.json.get("username")
     password = request.json.get("password")
+
     if not (username or password):
         return jsonify({"msg": "Missing username or password"}), 400
 
-    user = User.query.filter_by(username=username).first()
-    if not user or not pwd_context.verify(password, user.password):
+    try:
+        token = openid_connect.token(username, password, totp="12345")
+        user_info = openid_connect.userinfo(token['access_token'])
+    except Exception as e:
+        return jsonify({"message": f"Error occurred: {str(e)}"}), 401
+
+    if not user_info:
         return jsonify({"msg": "Bad credentials"}), 400
 
-    access_token = create_access_token(identity=user.id)
-    refresh_token = create_refresh_token(identity=user.id)
-    add_token_to_database(access_token, app.config["JWT_IDENTITY_CLAIM"])
-    add_token_to_database(refresh_token, app.config["JWT_IDENTITY_CLAIM"])
+    # access_token = create_access_token(identity=user.id)
+    # refresh_token = create_refresh_token(identity=user.id)
+    # add_token_to_database(access_token, app.config["JWT_IDENTITY_CLAIM"])
+    # add_token_to_database(refresh_token, app.config["JWT_IDENTITY_CLAIM"])
 
-    resp = {"access_token": access_token, "refresh_token": refresh_token}
+    resp = {"access_token": token["access_token"], "refresh_token": token["refresh_token"]}
     return jsonify(resp), 200
 
 

@@ -3,7 +3,7 @@ version: '3.6'
 services:
   web:
     env_file:
-      - ./.flaskenv
+      - ./.envs/.flaskenv
     build: .
     command: gunicorn -b 0.0.0.0:5000 api.wsgi:app
     depends_on:
@@ -21,7 +21,7 @@ services:
 
   db:
     env_file:
-      - ./.psqlenv
+      - ./.envs/.psqlenv
     image: postgres:latest
     networks:
       - default
@@ -30,3 +30,28 @@ services:
     restart: always
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
+
+  keycloak-db:
+    environment:
+      - POSTGRES_DB=keycloak
+      - POSTGRES_USER=keycloak
+      - POSTGRES_PASSWORD=123456
+    image: postgres:latest
+    networks:
+      - default
+    ports:
+      - 5433:5432
+    restart: always
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+
+  keycloak-server:
+    env_file:
+      - ./.envs/.keycloakenv
+    image: jboss/keycloak
+    networks:
+      - default
+    ports:
+      - 8080:8080
+    depends_on:
+      - keycloak-db
