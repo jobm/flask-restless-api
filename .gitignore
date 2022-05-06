@@ -92,7 +92,7 @@ entrypoint.sh
 .pytest_cache
 /.idea
 postgres-data
-.envs/.flaskenv
+.flaskenv
 migrations
 db/
 /.envs/.psqlenv
