@@ -3,7 +3,7 @@ version: '3.6'
 services:
   web:
     env_file:
-      - ./.envs/.flaskenv
+      - .flaskenv
     build: .
     command: gunicorn -b 0.0.0.0:5000 api.wsgi:app
     depends_on:
