@@ -93,7 +93,6 @@ entrypoint.sh
 /.idea
 postgres-data
 .flaskenv
-migrations
 db/
 /.envs/.psqlenv
 /.envs
