@@ -1,6 +1,6 @@
 # This is a simple Dockerfile to use while developing
 # It's not suitable for production
-FROM python:3.9.12-alpine
+FROM python:3.9.12
 
 RUN mkdir /code
 WORKDIR /code
